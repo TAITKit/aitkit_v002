@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 93%;
+    width: 300px;
+    position: fixed;
+    
+    top: 82px;
+    left: 0;
+    background-color: rgba(100, 100, 100, 0.3);
+    overflow-x: hidden;
+    padding-top: 20px;
+    margin-left: 150px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+}
+.sidenav label {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+}
+.sidenav option {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+}
+
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 450px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+    margin-right: 150px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+form {
+  margin: 0 auto;
+  width: 1400px;
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+
+  fieldset {
+  background-color: #F6FEE1;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid #C3CF88;
+}
+
+
+
+label {
+  display: inline-block;
+  text-align: center;
+}
+
+input, textarea {
+  vertical-align: top;
+  font: 1em sans-serif;
+  width: 300px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+}
+
+input:focus, textarea:focus {
+  border-color: #000;
+}
+
+textarea {
+  background-color: #F6FEE1;
+  vertical-align: top;
+  height: 10em;
+  width: 40em;
+}
+
+button {
+  margin-left: .5em;
+}
+pre {
+    background-color: #F6FEE1;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid #C3CF88;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  
+                  <select class="tagSelected" name="interested" style="padding: 6px 8px 6px 16px;background-color: rgba(100, 100, 100, 0);" >
+                  
+                  <option class="tag All" value="All">All</option>
+                  <?php
+                      //option 是下拉式選單中的選項，這邊做的是把所有的tag值顯示在下拉式選單裡
+                      $praetor = new Praetor();
+                      $sql = "SELECT tagName FROM tag GROUP BY tagName";
+                      //從url讀取tag的值
+                      $selectedTag = $_GET['tag'];
+                      
+                      //custosql定義在cls/Praetor.cls.php裡
+                      //參數中的array()是空陣列，要是query中有where的話就把欄位名丟進array裡
+                      $data = $praetor->custosql($sql, array());
+
+                      foreach ($data as $key => $value) {
+                      if ($value['tagName'] == $selectedTag)
+                      {
+                          echo '<option class="tag '.$value['tagName'].'" value="'.$value['tagName'].'" selected>'.$value['tagName'].'</option>';
+                      }
+                      else
+                      {
+                          echo '<option class="tag '.$value['tagName'].'" value="'.$value['tagName'].'" >'.$value['tagName'].'</option>';
+                      }
+                          
+                      }
+                      
+                  ?>
+                </select>
+                <input type="hidden" class="showAbbre" value="<?php echo $_GET['abbre'];?>">
+                <div class="list">
+
+</div>
+</div>
+
+<div class="main">
+  
+ </div>
+     
+</body>
+</html> 
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript"> var jQuery_1_5_1 = $.noConflict(true); </script>
+  <!--for search select-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+    //當網頁load進來時只會跑一次ready的function，要做的事情是把<div class="list">和<div class="main">清空
+    //<div class="list">放的是下拉式選單選到的屬於某個tag的全部的演算法標題，EX:顯示所有屬於NLP tag的演算法標題
+    //<div class="main">放的是選到的演算法內容，從上面的list可以選擇特定的演算法
+    $(document).ready(function(){
+      $(".main").empty();
+          $.ajax({
+          type: "POST",
+          url: "model/showContent.php",
+          data: "abbre="+$(".showAbbre").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".main").append(data);//當沒有錯誤時，把回傳的data append到class 名為main的html裡面(即<div class="main">)，這邊的data存的是html的碼，showContent.php會從資料庫抓abbre=$(".showAbbre").val()，即標題簡寫=class showAbbre的value，而showAbbre的value是抓url裡的abbre($_GET['abbre'])
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+      
+      $(".list").empty();
+          $.ajax({
+          type: "POST",
+          url: "model/showList.php",
+          data: "tagName="+$(".tagSelected").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".list").append(data);//當沒有錯誤時，把回傳的data append到class 名為list的html裡面(即<div class="list">)，這邊的data存的是html的碼，showList.php會從資料庫抓tagName=$(".tagSelected").val()，即下拉式選單選到的tag值
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    })
+    $(".tagSelected").change(function (){
+          $(".list").empty();
+          $.ajax({
+          type: "POST",
+          url: "model/showList.php",
+          data: "tagName="+$(".tagSelected").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".list").append(data);//跟上面一樣，只是這邊是當下拉式選單的值change(同function名)的時候會執行的function
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+      });
+
+    jQuery_1_5_1('.title').live('mouseover mouseout',function(event){
+      if (event.type == "mouseover"){
+      $('#tt').remove(); // 從html中移除id名為tt的元素
+      $('.main').append('<label id="tt" style="background-color:#ffffdf;">'+$(this).attr('abbre')+'</label>');
+      $('#tt').offset({top:event.pageY,left:event.pageX+100});
+      $('#tagname').focus();
+      }else if(event.type =="mouseout"){
+        $('#tt').remove();
+      }
+    });
+    
+    </script>

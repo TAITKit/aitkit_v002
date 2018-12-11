@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<style type="text/css">
+	form {
+  margin: 0 auto;
+  width: 1400px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+  fieldset {
+  background-color: #F6FEE1;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid #C3CF88;
+}
+
+form div + div {
+  margin-top: 1em;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  width: 150px;
+}
+
+input, textarea {
+  vertical-align: top;
+  font: 1em sans-serif;
+  width: 300px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+
+}
+
+input:focus, textarea:focus {
+  border-color: #000;
+}
+
+textarea {
+  vertical-align: top;
+  height: 10em;
+  width: 40em;
+}
+
+button {
+  margin-left: .5em;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+</style>
+
+<html>
+<div class="form-group">
+	<form action="index.php?item=addNewMethod" method="post" enctype="multipart/form-data">
+    <fieldset>
+      
+      
+	<div>
+    <legend>程式名稱:</legend>
+                              <label for="issueinput1">簡寫/Abbr:</label>
+                              <input type="text" id="issueinput1" class="form-control" name="titleAbbre" placeholder="EX:Discourse">
+                          </div>
+                          <div>
+                              <label for="issueinput5">全名/FullName:</label>
+                              <input type="text" id="issueinput2" class="form-control" name="titleInfo" placeholder="EX:A Unified RvNN Framework for End-to-End Chinese Discourse Parsing">
+                          </div>
+                          </fieldset>
+                          <fieldset>
+      
+  <div>
+    <legend>作者/單位:</legend>
+                              <label for="issueinput1">作者英文名/Author:</label>
+                              <input type="text" id="issueinput3" class="form-control" name="authorName" placeholder="EX:Chuan-An Lin, Hen-Hsen Huang, Zi-Yuan Chen and Hsin-Hsi Chen">
+                          </div>
+                          <div>
+                              <label for="issueinput5">單位/Unit:</label>
+                              <input type="text" id="issueinput4" class="form-control" name="authorUnit" placeholder="EX:台灣大學資訊工程系">
+                          </div>
+                          </fieldset>
+                          <fieldset>
+      
+  <div>
+    <legend>程式功能:</legend>
+                              <label for="issueinput1">英文/ProgramGoal:</label>
+                              <input type="text" id="issueinput5" class="form-control" name="functionEnglish" placeholder="EX:Chinese discourse parser">
+                          </div>
+                          <div>
+                              <label for="issueinput5">中文/ProgramGoal:</label>
+                              <input type="text" id="issueinput6" class="form-control" name="functionChinese" placeholder="EX:中文語篇剖析器">
+                          </div>
+                          </fieldset>
+                          <fieldset>
+      
+  <div>
+    <legend>程式功能說明-文字描述(中英文皆可)/Description</legend>
+    <textarea id="issueinput7" class="form-control" name="functionDescription"  rows="6" cols="40" placeholder=""></textarea>
+                          </div>
+                          <div class="linkForm">
+    <legend>說明連結/Link:</legend>
+    <button type="button" class="addLink" onclick="addData()">
++新增
+</button>                     
+                          </div>
+                         
+                          </fieldset>
+                          <fieldset>
+      
+  <div>
+    <legend>程式源碼/SourceCode:</legend>
+                              <label for="issueinput5"></label>
+                              <input type="text" id="issueinput8" class="form-control" name="github" placeholder="EX:https://github.com/abccaba2000/discourse-parser">
+                          </div>
+
+                          </fieldset>
+                          <fieldset>
+
+  <div class="tagForm">
+    <legend>程式類別/Category:</legend>
+    <button type="button" class="addTag" onclick="addData()">
++新增
+</button>                     
+                          </div>
+                          </fieldset>
+                          <fieldset>
+      
+  <div class="dataSetForm">
+    <legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>
+    <button type="button" class="addDataSet" onclick="addData()">
++新增
+</button>                     
+                          </div>
+                          
+                          </fieldset>
+                          <fieldset>
+      
+  <div>
+    <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
+                              <label for="issueinput10">系統環境:</label>
+                              <input type="text" id="issueinput10" class="form-control" name="systemEnvironment" placeholder="EX:Windows/Linux">
+                            </div>
+                            <div>
+                              <label for="issueinput5">套件:</label>
+                              <input type="text" id="issueinput11" class="form-control" name="package" placeholder="EX:Python, Tensorflow, Standford Chinese Parser">
+                          </div>
+                          </fieldset>
+                          <fieldset class="allowInput">
+      
+  <div>
+    <legend>程式是否可以接受輸入檔，將結果儲存至輸出檔/CanExecute:</legend>
+                              <input type='radio' name='acceptInput' class="acceptInput" style="margin:5px; width: 10px;" value='1'>是
+                              <input type='radio' name='acceptInput' class="acceptInput" style="margin:5px; width: 10px;" value='0' checked>否(結束)
+                          </div>
+                          </fieldset>
+                          <fieldset class="inputAllowed">
+      
+  <div>
+    <legend>程式接受的輸入/輸出格式:</legend>
+                            <label for="input">輸入格式/InputType:</label>
+                <select id="inputFormat" name="inputFormat" class="format">
+                  <option value="">請選擇</option>
+                  <option value="Type-A: Document">Type-A: Document</option>
+                  <option value="Type-B: Image">Type-B: Image</option>
+                  <option value="Type-C: Speech">Type-C: Speech</option>
+                  <option value="Type-D: Html Form">Type-D: Html Form</option>
+                </select>
+                          </div>
+                          <div>
+                            <label for="output">輸出格式/OutputType:</label>
+                <select id="outputFormat" name="outputFormat" class="format">
+                  <option value="">請選擇</option>
+                  <option value="Type-A: Document">Type-A: Document</option>
+                  <option value="Type-B: Image">Type-B: Image</option>
+                  <option value="Type-C: Speech">Type-C: Speech</option>
+                  <option value="Type-D: Html Form">Type-D: Html Form</option>
+                </select>
+                          </div>
+                          </fieldset>
+                          <fieldset class="inputAllowed allowParemeter">
+      
+  <div>
+    <legend>程式在被執行時是否需要輸入參數/NeedParameter:</legend>
+                              <input type='radio' name='acceptParemeter' id="acceptParemeter" style="margin:5px; width: 10px;" value="1">要
+                              <input type='radio' name='acceptParemeter' id="acceptParemeter" style="margin:5px;width: 10px;" value="0" checked>不要(結束)
+                          </div>
+                          </fieldset>
+                          <fieldset  class="inputAllowed paremeterAllowed">
+      
+  <div class="paremeterForm">
+    <legend>參數的功能說明以及參數是否是有範圍(Range):</legend>
+    <button type="button" class="addParemeter">
++新增
+</button>                      
+                           </div>                
+                          </fieldset>
+                          <div>
+                          <button type="submit" class="button">
+                  <i class="add button"></i> Save
+              </button>
+            </div>
+
+                      </form>
+</div>
+<input type="hidden" class = "pid"value="<?php echo $_SESSION['user']['PID']; ?>">
+</html>
+<?php $a = 0; ?>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript"> var jQuery_1_5_1 = $.noConflict(true); </script>
+  <!--for search select-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $(".inputAllowed").hide();
+      $(".paremeterAllowed").hide();
+    })
+      
+    $(".allowInput").change(function (){
+      var elements = document.getElementsByName( "acceptParemeter" );
+      $(".inputAllowed").toggle();
+      elements[0].checked = false;
+      elements[1].checked = true;
+      $(".paremeterAllowed").hide();
+
+      var elements2 = document.getElementsByName( "acceptInput" );
+      if (!elements2[0].checked)
+      {
+        $("#inputFormat").val('');
+        $("#outputFormat").val('');
+      }
+      });
+    $(".allowParemeter").change(function (){
+      $(".paremeterAllowed").toggle();
+      });
+   
+    $(".addLink").click(function(e){ // make sure the image is click
+        $.ajax({
+          type: "POST",
+          url: "model/addLink.php",
+          data: "pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".linkForm").append(data);
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    });
+
+    $(".addTag").click(function(e){ // make sure the image is click
+        $.ajax({
+          type: "POST",
+          url: "model/addTag.php",
+          data: "pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".tagForm").append(data);
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    });
+
+    $(".addDataSet").click(function(e){ // make sure the image is click
+        $.ajax({
+          type: "POST",
+          url: "model/addDataSet.php",
+          data: "pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".dataSetForm").append(data);
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    });
+
+    $(".addParemeter").click(function(e){ // make sure the image is click
+        $.ajax({
+          type: "POST",
+          url: "model/addParemeter.php",
+          data: "pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".paremeterForm").append(data);
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    });
+    
+    $(".linkForm").click(function(e){ 
+        var target = $( e.target );
+        if ( target.is( "button" ) && target.attr('class') != 'addLink') {
+        $.ajax({
+          type: "POST",
+          url: "model/deleteLink.php",
+          data: "AID=-1&numberValue="+target.attr('value')+"&pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".link"+target.attr('value')).remove();
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+  }
+    });
+
+    $(".tagForm").click(function(e){ 
+        var target = $( e.target );
+        if ( target.is( "button" ) && target.attr('class') != 'addTag') {
+        $.ajax({
+          type: "POST",
+          url: "model/deleteTag.php",
+          data: "AID=-1&numberValue="+target.attr('value')+"&pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".tag"+target.attr('value')).remove();
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+  }
+    });
+
+    $(".dataSetForm").click(function(e){ 
+        var target = $( e.target );
+        if ( target.is( "button" ) && target.attr('class') != 'addDataSet') {
+        $.ajax({
+          type: "POST",
+          url: "model/deleteDataSet.php",
+          data: "AID=-1&numberValue="+target.attr('value')+"&pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".dataSetTable"+target.attr('value')).remove();
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+  }
+    });
+
+    $(".paremeterForm").click(function(e){ 
+        var target = $( e.target );
+        if ( target.is( "button" ) && target.attr('class') != 'addParemeter') {
+        $.ajax({
+          type: "POST",
+          url: "model/deleteParemeter.php",
+          data: "AID=-1&numberValue="+target.attr('value')+"&pid="+$(".pid").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".paremeterTable"+target.attr('value')).remove();
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+  }
+    });
+    
+    </script>
