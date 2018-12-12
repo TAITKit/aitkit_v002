@@ -61,11 +61,12 @@ button {
 <html>
 <div class="form-group">
 	<form action="index.php?item=addNewMethod" method="post" enctype="multipart/form-data">
+    <legend>程式名稱:</legend>
     <fieldset>
       
       
 	<div>
-    <legend>程式名稱:</legend>
+    
                               <label for="issueinput1">簡寫/Abbr:</label>
                               <input type="text" id="issueinput1" class="form-control" name="titleAbbre" placeholder="EX:Discourse">
                           </div>
@@ -74,10 +75,11 @@ button {
                               <input type="text" id="issueinput2" class="form-control" name="titleInfo" placeholder="EX:A Unified RvNN Framework for End-to-End Chinese Discourse Parsing">
                           </div>
                           </fieldset>
+                          <legend>作者/單位:</legend>
                           <fieldset>
       
   <div>
-    <legend>作者/單位:</legend>
+    
                               <label for="issueinput1">作者英文名/Author:</label>
                               <input type="text" id="issueinput3" class="form-control" name="authorName" placeholder="EX:Chuan-An Lin, Hen-Hsen Huang, Zi-Yuan Chen and Hsin-Hsi Chen">
                           </div>
@@ -86,10 +88,11 @@ button {
                               <input type="text" id="issueinput4" class="form-control" name="authorUnit" placeholder="EX:台灣大學資訊工程系">
                           </div>
                           </fieldset>
+                          <legend>程式功能:</legend>
                           <fieldset>
       
   <div>
-    <legend>程式功能:</legend>
+    
                               <label for="issueinput1">英文/ProgramGoal:</label>
                               <input type="text" id="issueinput5" class="form-control" name="functionEnglish" placeholder="EX:Chinese discourse parser">
                           </div>
@@ -98,10 +101,11 @@ button {
                               <input type="text" id="issueinput6" class="form-control" name="functionChinese" placeholder="EX:中文語篇剖析器">
                           </div>
                           </fieldset>
+                          <legend>程式功能說明-文字描述(中英文皆可)/Description</legend>
                           <fieldset>
       
   <div>
-    <legend>程式功能說明-文字描述(中英文皆可)/Description</legend>
+    
     <textarea id="issueinput7" class="form-control" name="functionDescription"  rows="6" cols="40" placeholder=""></textarea>
                           </div>
                           <div class="linkForm">
@@ -112,38 +116,42 @@ button {
                           </div>
                          
                           </fieldset>
+                          <legend>程式源碼/SourceCode:</legend>
                           <fieldset>
       
   <div>
-    <legend>程式源碼/SourceCode:</legend>
+    
                               <label for="issueinput5"></label>
                               <input type="text" id="issueinput8" class="form-control" name="github" placeholder="EX:https://github.com/abccaba2000/discourse-parser">
                           </div>
 
                           </fieldset>
+                          <legend>程式類別/Category:</legend>
                           <fieldset>
 
   <div class="tagForm">
-    <legend>程式類別/Category:</legend>
+    
     <button type="button" class="addTag" onclick="addData()">
 +新增
 </button>                     
                           </div>
                           </fieldset>
+                          <legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>
                           <fieldset>
       
   <div class="dataSetForm">
-    <legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>
+    
     <button type="button" class="addDataSet" onclick="addData()">
 +新增
 </button>                     
                           </div>
                           
                           </fieldset>
+                          <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
                           <fieldset>
       
   <div>
-    <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
+    
                               <label for="issueinput10">系統環境:</label>
                               <input type="text" id="issueinput10" class="form-control" name="systemEnvironment" placeholder="EX:Windows/Linux">
                             </div>
@@ -152,18 +160,20 @@ button {
                               <input type="text" id="issueinput11" class="form-control" name="package" placeholder="EX:Python, Tensorflow, Standford Chinese Parser">
                           </div>
                           </fieldset>
+                          <legend>程式是否可以接受輸入檔，將結果儲存至輸出檔/CanExecute:</legend>
                           <fieldset class="allowInput">
       
   <div>
-    <legend>程式是否可以接受輸入檔，將結果儲存至輸出檔/CanExecute:</legend>
+    
                               <input type='radio' name='acceptInput' class="acceptInput" style="margin:5px; width: 10px;" value='1'>是
                               <input type='radio' name='acceptInput' class="acceptInput" style="margin:5px; width: 10px;" value='0' checked>否(結束)
                           </div>
                           </fieldset>
+                           <legend class="inputAllowed">程式接受的輸入/輸出格式:</legend>
                           <fieldset class="inputAllowed">
       
   <div>
-    <legend>程式接受的輸入/輸出格式:</legend>
+   
                             <label for="input">輸入格式/InputType:</label>
                 <select id="inputFormat" name="inputFormat" class="format">
                   <option value="">請選擇</option>
@@ -184,18 +194,20 @@ button {
                 </select>
                           </div>
                           </fieldset>
+                          <legend class="inputAllowed allowParemeter">程式在被執行時是否需要輸入參數/NeedParameter:</legend>
                           <fieldset class="inputAllowed allowParemeter">
       
   <div>
-    <legend>程式在被執行時是否需要輸入參數/NeedParameter:</legend>
+    
                               <input type='radio' name='acceptParemeter' id="acceptParemeter" style="margin:5px; width: 10px;" value="1">要
                               <input type='radio' name='acceptParemeter' id="acceptParemeter" style="margin:5px;width: 10px;" value="0" checked>不要(結束)
                           </div>
                           </fieldset>
+                          <legend class="inputAllowed paremeterAllowed">參數的功能說明以及參數是否是有範圍(Range):</legend>
                           <fieldset  class="inputAllowed paremeterAllowed">
       
   <div class="paremeterForm">
-    <legend>參數的功能說明以及參數是否是有範圍(Range):</legend>
+    
     <button type="button" class="addParemeter">
 +新增
 </button>                      

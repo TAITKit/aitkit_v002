@@ -489,11 +489,11 @@ button {
 <div class="form-group">
   <form action="index.php?item=praetorLogin&tag=all" method="post">
     <h3 class="Topic">您已成功上傳演算法，以下為您的上傳資訊：</h3>
-    
+    <legend>程式名稱:</legend>
   <fieldset>
       
   <div>
-    <legend>程式名稱:</legend>
+    
                               <label for="issueinput1">簡寫/Abbr:</label>
                               <?php echo $_POST['titleAbbre'];?>
                           </div>
@@ -502,10 +502,11 @@ button {
                               <?php echo $_POST['titleInfo'];?>
                           </div>
                           </fieldset>
+                          <legend>作者/單位:</legend>
                           <fieldset>
       
   <div>
-    <legend>作者/單位:</legend>
+    
                               <label for="issueinput1">作者英文名/Author:</label>
                               <?php echo $_POST['authorName'];?>
                           </div>
@@ -514,10 +515,11 @@ button {
                               <?php echo $_POST['authorUnit'];?>
                           </div>
                           </fieldset>
+                          <legend>程式功能:</legend>
                           <fieldset>
       
   <div>
-    <legend>程式功能:</legend>
+    
                               <label for="issueinput1">英文/ProgramGoal:</label>
                               <?php echo $_POST['functionEnglish'];?>
                           </div>
@@ -526,13 +528,15 @@ button {
                               <?php echo $_POST['functionChinese'];?>
                           </div>
                           </fieldset>
+                          <legend>程式功能說明-文字描述(中英文皆可)/Description</legend>
                           <fieldset>
       
   <div>
-    <legend>程式功能說明-文字描述(中英文皆可)/Description</legend>
+    
     <textarea><?php echo $_POST['functionDescription'];?></textarea>
                           </div>
                           <div>
+                            <br>
     <legend>說明連結/Link:</legend>
     <?php
         $n = 0;
@@ -548,17 +552,19 @@ button {
 
                          
                           </fieldset>
+                          <legend>程式源碼/SourceCode:</legend>
                           <fieldset>
       
   <div>
-    <legend>程式源碼/SourceCode:</legend>
+    
                               <?php echo $_POST['github'];?>
                           </div>
                           </fieldset>
+                          <legend>程式類別/Category:</legend>
                           <fieldset>
       
   <div>
-    <legend>程式類別/Category:</legend>
+    
     <?php
         $n = 0;
                             while ($n <= $tagData[0]['no'])
@@ -576,10 +582,11 @@ button {
                           <?php if ($dataSetData)
                           {
                             ?>
+                            <legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>
                           <fieldset>
 
     <div>
-            <legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>
+            
       <?php
         $n = 0;
                             while ($n <= $dataSetData[0]['no'])
@@ -607,10 +614,11 @@ button {
                           </fieldset>
                           <?php
                       }?>
+                      <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
                           <fieldset>
       
   <div>
-    <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
+    
                               <label for="issueinput10">系統環境:</label>
                               <?php echo $_POST['systemEnvironment'];?>
                             </div>
@@ -622,10 +630,11 @@ button {
                           <?php if ($_POST['inputFormat'])
                           {
                             ?>
+                            <legend>程式接受的輸入/輸出格式:</legend>
                           <fieldset class="inputAllowed">
       
   <div>
-    <legend>程式接受的輸入/輸出格式:</legend>
+    
                             <label for="input">輸入格式/InputType:</label>
                 <?php echo $_POST['inputFormat'];?>
                           </div>
@@ -640,11 +649,12 @@ button {
                           if ($paremeterData)
                           {
                       ?>
+                            <legend>參數的功能說明以及參數是否是有範圍(Range)/NeedParameter:</legend>
                           <fieldset  class="inputAllowed paremeterAllowed">
       
 
                        <div>
-                        <legend>參數的功能說明以及參數是否是有範圍(Range)/NeedParameter:</legend>
+
                         <?php 
         $n = 0;
         while ($n <= $paremeterData[0]['no'])
@@ -673,10 +683,11 @@ button {
                           </fieldset>
                           <?php
                       }?>
+                      <legend>License key:</legend>
                       <fieldset>
       
   <div>
-    <legend>License key:</legend>
+    
                               <?php echo $licenseKey;?>
                           </div>
                           </fieldset>

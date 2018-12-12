@@ -14,10 +14,12 @@ body {
 }
 
 .userinfo {
-
+  
+  margin-left: 216.603774px;
   overflow: hidden;
   background-color: #333;
-}
+  height: 30px;
+  }
 .userinfo label {
   float: right;
   color: #f2f2f2;
@@ -40,8 +42,11 @@ body {
   color: black;
 }
 .topnav {
+  
+  margin-left: 216.603774px;
   overflow: hidden;
   background-color: #333;
+  height: 50px;
 }
 
 .topnav a {
@@ -51,6 +56,7 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  height: 100%;
 }
 
 .topnav a:hover {
@@ -62,10 +68,47 @@ body {
   background-color: #4CAF50;
   color: white;
 }
+
+img{
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%; 
+}
+.logo {
+  float:left;
+  
+  overflow: hidden;
+  background-color: #333;
+  height: 80px;
+}
+
+.logo a {
+  
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.logo a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.logo a.active {
+  background-color: #4CAF50;
+  color: white;
+}
 </style>
 </head>
 <body>
+  <div class="logo">
+      <img src="app-assets\images\logo5.png" alt="Taitk" >
+  </div>
 <div class="userinfo">
+
   <?php 
     if ($_SESSION['user'] == "")
     {
@@ -92,7 +135,7 @@ body {
     if ($_SESSION['user'] != "")
     {
       ?>
-  <a class="<?php echo ($_GET['item'] == 'praetorLogin') ? 'active':''; ?>" href="?item=praetorLogin&tag=All" style="float: right;"><?php echo $_SESSION['user']['PMName']?>'s algorithm</a>
+  <a class="<?php echo ($_GET['item'] == 'praetorLogin') ? 'active':''; ?>" href="?item=praetorLogin&tag=All" style="float: right;"><?php echo $_SESSION['user']['PMName']?>'s Algorithm</a>
   <?php
     }
   ?>

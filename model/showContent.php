@@ -15,11 +15,11 @@
     $linkData = $praetor->custosql($sql4, array('algorithmID'=>$data[0]['AID']));
     $sql5 = "SELECT * FROM tag WHERE algorithmID=%d_algorithmID ORDER BY no desc";
     $tagData = $praetor->custosql($sql5, array('algorithmID'=>$data[0]['AID']));
-    $content = '
+    $content = '<legend>程式名稱:</legend>
     <fieldset>
 
   <div>
-        <legend>程式名稱:</legend>
+        
                               <label for="issueinput1">簡寫/Abbre:</label>
                               <label>'.$data[0]['Abbreviation'].'</label>
                           </div>
@@ -28,12 +28,12 @@
                               <label>'.$data[0]['AlgorithmTitle'].'</label>
                           </div>
                           </fieldset>
-                          
+                          <legend>作者/單位:</legend>
                           <fieldset>
 
       
   <div>
-                            <legend>作者/單位:</legend>
+                            
                               <label for="issueinput1">作者英文名/Author:</label>
                               <label>'.$data[0]['authorName'].'</label>
                           </div>
@@ -42,12 +42,12 @@
                               <label>'.$data[0]['authorUnit'].'</label>
                           </div>
                           </fieldset>
-                          
+                          <legend>程式功能:</legend>
                           <fieldset>
                           
       
   <div>
-  <legend>程式功能:</legend>
+  
                               <label for="issueinput1">英文/ProgramGoal:</label>
                               <label>'.$data[0]['functionEnglish'].'</label>
                           </div>
@@ -56,18 +56,18 @@
                               <label>'.$data[0]['functionChinese'].'</label>
                           </div>
                           </fieldset>
-                                
+                                <legend>程式功能說明-文字描述/Desciption:</legend>
                           <fieldset>
 
   <div>
-  <legend>程式功能說明-文字描述/Desciption:</legend>
+  
     '.$data[0]['functionDescription'].'
                           </div>
                           ';
                           if ($linkData[0])
                           {
                                 $n = 0;
-                                $content = $content.'<div><legend>說明連結/Link:</legend>';
+                                $content = $content.'<br><div><legend>說明連結/Link:</legend>';
                             while ($n <= $linkData[0]['no'])
                             {
                               if ($linkData[$linkData[0]['no'] - $n]['linkUrl'])
@@ -83,19 +83,19 @@
                             $content = $content.'
                           </div>
                           </fieldset>
-                          
+                          <legend>程式源碼/SourceCode:</legend>
                           <fieldset>
                           
       
   <div>
-  <legend>程式源碼/SourceCode:</legend>
+  
                               <a href="'.$data[0]['GitHub'].'">'.$data[0]['GitHub'].'</a>
                           </div>
                           </fieldset>';
                           if ($tagData[0])
                           {
                               $n = 0;
-                              $content = $content.'<fieldset><div><legend>程式類別/Category:</legend>';
+                              $content = $content.'<legend>程式類別/Category:</legend><fieldset><div>';
                           while ($n <= $tagData[0]['no'])
                             {
                               if ($tagData[$tagData[0]['no'] - $n]['tagName'])
@@ -111,7 +111,7 @@
                           if ($dataSetData[0])
                           {
                               $n = 0;
-                              $content = $content.'<fieldset><div><legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend>';
+                              $content = $content.'<legend>執行程式所需要的資料集，語料庫等等的資源/DataSet:</legend><fieldset><div>';
                           while ($n <= $dataSetData[0]['no'])
                             {
                               if ($dataSetData[$dataSetData[0]['no'] - $n]['dataSetName'] || $dataSetData[$dataSetData[0]['no'] - $n]['url'] || $dataSetData[$dataSetData[0]['no'] - $n]['fee'])
@@ -137,11 +137,11 @@
                             }
                             $content = $content.'</div></fieldset>';
                           }
-                          $content = $content.'<fieldset>
+                          $content = $content.'<legend>執行程式所需要的系統環境及套件/EnvPackage:</legend><fieldset>
 
       
   <div>
-                            <legend>執行程式所需要的系統環境及套件/EnvPackage:</legend>
+                            
                               <label for="issueinput1">系統環境:</label>
                               <label>'.$data[0]['systemEnvironment'].'</label>
                           </div>
@@ -152,11 +152,11 @@
                           </fieldset>';
                           if ($data[0]['Input'] || $data[0]['Output'])
                           {
-                              $content = $content.'<fieldset>
+                              $content = $content.'<legend>程式接受的輸入/輸出格式:</legend><fieldset>
 
       
   <div>
-                            <legend>程式接受的輸入/輸出格式:</legend>
+                            
                               <label for="issueinput1">輸入格式/InputType:</label>
                               <label>'.$data[0]['Input'].'</label>
                           </div>
@@ -170,7 +170,7 @@
                           if ($paremeterData[0])
                           {
                               $n = 0;
-                              $content = $content.'<fieldset><div><legend>參數的功能說明以及參數是否是有範圍(Range):</legend>';
+                              $content = $content.'<legend>參數的功能說明以及參數是否是有範圍(Range):</legend><fieldset><div>';
                           while ($n <= $paremeterData[0]['no'])
                             {
                               if ($paremeterData[$paremeterData[0]['no'] - $n]['paremeter'] || $paremeterData[$paremeterData[0]['no'] - $n]['paremeterRange'] || $paremeterData[$paremeterData[0]['no'] - $n]['format'] || $paremeterData[$paremeterData[0]['no'] - $n]['function'])
