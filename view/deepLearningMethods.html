@@ -174,9 +174,15 @@ pre {
                       }
                           
                       }
-                      
+                      $sql2 = "SELECT AlgorithmTitle FROM algorithm WHERE Abbreviation=%s_Abbreviation";
+                      $data2 = $praetor->custosql($sql2, array('Abbreviation'=>$_GET['abbre']));
+                      if ($data2)
+                      {
+                      	$algorithmTitle = $data2[0]['AlgorithmTitle'];
+                      }
                   ?>
                 </select>
+                <label><?php echo $algorithmTitle; ?></label>
 </div>
 <div class="sidenav">
   

@@ -12,7 +12,7 @@ body {
     width: 300px;
     position: fixed;
     
-    top: 112px;
+    top: 142px;
     left: 0;
     background-color: rgba(100, 100, 100, 0.3);
     overflow-x: hidden;
@@ -59,10 +59,7 @@ body {
     .sidenav a {font-size: 18px;}
 }
 
-form {
-  margin-left: 150px;
-  
-}
+
 
   fieldset {
   background-color: #F6FEE1;
@@ -126,29 +123,43 @@ pre {
     color: white;
 }
 
+.titleInfo {
+  
+  
+  overflow: hidden;
+  background-color: #4CAF50;
+  height: 30px;
+}
+
+.titleInfo a {
+  
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  height: 100%;
+}
+
+.titleInfo a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.titleInfo a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
 
 
 </style>
 </head>
 <body>
-<form action="index.php?item=NewMethod" method="post" style="float: left;">
-<div class="new method">
-  <button type="submit" class="square_btn">
-        <i class="fa fa-caret-right"></i> +新增演算法
-    </button>
-</div>
-</form>
-<form action="index.php?item=editAlgorithm" method="post">
-<div class="new method">
-  <button type="submit" class="square_btn">
-        <i class="fa fa-caret-right"></i> - 修改演算法
-    </button>
-    <input type="hidden" name="abbr" value="<?php echo $_GET['abbre'];?>">
-</div>
-</form>
-<div class="sidenav">
-  
-                  <select class="tagSelected" name="interested" style="padding: 6px 8px 6px 16px;background-color: rgba(100, 100, 100, 0);" >
+  <div class="titleInfo">
+  <button type="button" class="top1"></button>
+    <button type="button" class="top2"></button>
+    <select class="tagSelected" name="interested" style="padding: 6px 8px 6px 16px;background-color: rgba(100, 100, 100, 0);" >
                   
                   <option class="tag All" value="All">All</option>
                   <?php
@@ -173,9 +184,46 @@ pre {
                       }
                           
                       }
+                      $sql2 = "SELECT AlgorithmTitle FROM algorithm WHERE Abbreviation=%s_Abbreviation";
+                      $data2 = $praetor->custosql($sql2, array('Abbreviation'=>$_GET['abbre']));
+                      if ($data2)
+                      {
+                        $algorithmTitle = $data2[0]['AlgorithmTitle'];
+                      }
                       
                   ?>
                 </select>
+                <label><?php echo $algorithmTitle; ?></label>
+  </div>
+<form action="index.php?item=NewMethod" method="post" style="float: left;">
+<div class="new method">
+  <button type="submit" class="square_btn">
+        <i class="fa fa-caret-right"></i> +新增演算法
+    </button>
+</div>
+</form>
+<form action="index.php?item=editAlgorithm" method="post" style="float: left;">
+<div class="new method">
+  <button type="submit" class="square_btn">
+        <i class="fa fa-caret-right"></i> - 修改演算法
+    </button>
+    <input type="hidden" name="abbr" value="<?php echo $_GET['abbre'];?>">
+</div>
+</form>
+
+<form action="index.php?item=deleteAlgorithm" method="post">
+<div class="new method">
+  <?php $str='"您確定要刪除該演算法？(本動作將無法復原)"'; ?>
+  <button type="submit" class="square_btn" onClick = 'return confirm("您確定要刪除該演算法？(本動作將無法復原)")'>
+        <i class="fa fa-caret-right"></i> - 刪除演算法
+    </button>
+    <input type="hidden" name="abbr" value="<?php echo $_GET['abbre'];?>">
+</div>
+</form>
+
+<div class="sidenav">
+  
+                  
                 <input type="hidden" class="showAbbre" value="<?php echo $_GET['abbre'];?>">
                 <input type="hidden" class="PID" value="<?php echo $_SESSION['user']['PID'];?>">
                 <div class="list">
@@ -201,6 +249,24 @@ pre {
     //<div class="main">放的是選到的演算法內容，從上面的list可以選擇特定的演算法
     $(document).ready(function(){
       $(".main").empty();
+      $.ajax({
+          type: "POST",
+          url: "model/topTwo.php",
+          restful:true,
+          cache:false,
+          success: function(data){
+            var topOneTwo = new Array();
+            topOneTwo = data.split('|');
+            $(".top1").html(topOneTwo[0]);
+            $(".top2").html(topOneTwo[1]);
+            $(".top1").val(topOneTwo[0]);
+            $(".top2").val(topOneTwo[1]);
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
           $.ajax({
           type: "POST",
           url: "model/showContent.php",
@@ -259,6 +325,42 @@ pre {
       }else if(event.type =="mouseout"){
         $('#tt').remove();
       }
+    });
+
+    $(".top1").click(function(e){ // make sure the image is click
+        $(".list").empty();
+          $.ajax({
+          type: "POST",
+          url: "model/showList.php",
+          data: "tagName="+$(".top1").val()+"&PID="+$(".PID").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".list").append(data);//跟上面一樣，只是這邊是當下拉式選單的值change(同function名)的時候會執行的function
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
+    });
+
+    $(".top2").click(function(e){ // make sure the image is click
+        $(".list").empty();
+          $.ajax({
+          type: "POST",
+          url: "model/showList.php",
+          data: "tagName="+$(".top2").val()+"&PID="+$(".PID").val(),
+          restful:true,
+          cache:false,
+          success: function(data){
+            $(".list").append(data);//跟上面一樣，只是這邊是當下拉式選單的值change(同function名)的時候會執行的function
+          },
+          error: function (error) {
+            alert('error');
+          }
+          
+        });
     });
     
     </script>

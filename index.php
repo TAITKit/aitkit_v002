@@ -71,6 +71,10 @@ if($_SESSION['user'] == ""){
 		case "editAlgorithmPHP":
 			include('model/editAlgorithm.php');
 		break;
+
+		case "deleteAlgorithm":
+			include('model/deleteAlgorithm.php');
+		break;
 		default:
 		break;
 	}
